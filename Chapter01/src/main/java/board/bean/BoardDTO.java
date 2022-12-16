@@ -3,8 +3,10 @@ package board.bean;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
 public class BoardDTO {
 	private int seq;
 	private String name;
@@ -13,7 +15,7 @@ public class BoardDTO {
 	private Date logtime;
 	
 	
-	/*
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -44,6 +46,6 @@ public class BoardDTO {
 	public void setLogtime(Date logtime) {
 		this.logtime = logtime;
 	}
-	*/
+	
 	
 }
