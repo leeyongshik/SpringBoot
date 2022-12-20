@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1><img alt="" src="../img/222.gif" width="100" height="100" style="cursor: pointer;" onclick="location.href='../'">리스트</h1>
+<h1><img alt="" src="../img/camera.png" width="100" height="100" style="cursor: pointer;" onclick="location.href='../'">리스트</h1>
 <hr>
 <table border="1" id="userListTable">
 	<tr>
@@ -20,11 +20,11 @@
 
 <div style="margin-top: 20px; width: 470px; text-align: center">
 	<form id="searchForm">
-		<select id="searchOption">
+		<select id="searchOption" name="searchOption">
 			<option value="name">이름</option>
 			<option value="id">아이디</option>
 		</select>
-		<input type="text" id="keyword">
+		<input type="text" id="keyword" name="keyword">
 		<input type="button" id="searchBtn" value="검색">
 	</form>
 </div>

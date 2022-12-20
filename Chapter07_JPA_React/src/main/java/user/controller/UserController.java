@@ -5,38 +5,44 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import user.bean.UserDTO;
 import user.service.UserService;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping(value = "user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping(value = "/getList")
+	public List<UserDTO> getUserList(){
+		return userService.getList();
+	}
+	
+	/*
 	@GetMapping(value = "/writeForm")
 	public String writeFrom() {
 		return "user/writeForm";
 	}
 
 	@PostMapping(value = "/write")
-	@ResponseBody //리턴값이 없을때 xml로 가지 않고 돌아가도록 설정
 	public void write(@ModelAttribute UserDTO userDTO) {
 		//DB
 		userService.write(userDTO);
 	}
 	
 	@PostMapping(value = "/checkId")
-	@ResponseBody
 	public String checkId(@RequestParam String id) {
 		boolean exise = userService.isExistId(id);
 		String result = (exise+"");
@@ -49,7 +55,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/getList")
-	@ResponseBody // list를 JSON으로 변환
+	@CrossOrigin
 	public List<UserDTO> getUserList(){
 		return userService.getList();
 	}
@@ -60,14 +66,12 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/getUser")
-	@ResponseBody
 	public Optional<UserDTO> getUser(@RequestParam String id) {
 		
 		return userService.getUser(id);
 	}
 	
 	@PostMapping(value = "/update")
-	@ResponseBody //리턴값이 없을때 xml로 가지 않고 돌아가도록 설정
 	public void update(@ModelAttribute UserDTO userDTO) {
 		//DB
 		userService.update(userDTO);
@@ -79,15 +83,15 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/delete")
-	@ResponseBody
 	public void delete(String id) {
 		userService.delete(id);
 	}
 	
-	
 	@PostMapping(value = "/search")
-	@ResponseBody
 	public List<UserDTO> search(@RequestParam Map<String, String> map) { // searchOption, keyword
 		return userService.search(map);
 	}
+	*/
+	
+	
 }
