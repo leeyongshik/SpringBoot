@@ -30,6 +30,31 @@ public class UserController {
 		return userService.getList();
 	}
 	
+	@PostMapping(value = "/write")
+	public void write(@ModelAttribute UserDTO userDTO) {
+		//DB
+		userService.write(userDTO);
+	}
+	
+	@GetMapping(value = "/checkId")
+	public boolean checkId(@RequestParam String id) {
+		boolean exise = userService.isExistId(id);
+		String result = (exise+"");
+		System.out.println(result);
+		return exise;
+	}
+	
+	@PostMapping(value = "/getUser")
+	public Optional<UserDTO> getUser(@RequestParam String id) {
+		
+		return userService.getUser(id);
+	}
+	
+	@GetMapping(value = "/delete")
+	public void delete(String id) {
+		userService.delete(id);
+	}
+	
 	/*
 	@GetMapping(value = "/writeForm")
 	public String writeFrom() {
