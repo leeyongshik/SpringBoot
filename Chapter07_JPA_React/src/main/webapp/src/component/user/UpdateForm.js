@@ -33,11 +33,13 @@ const UpdateForm = () => {
     const onSearch = () => {
         setUpdateNameDiv('')
 
-        axios.post(`http://localhost:8080/user/getUser?id=${updateName}`)
+        axios.get(`http://localhost:8080/user/getUser?id=${updateName}`)
              .then(res => {
                     setUpdateNameDiv(res.data ? '' : '찾는 아이디가 없습니다.')
                     setForm(res.data || '')
                     setShow(res.data ? false : true)
+
+                    //res.data ===null ? (setForm(res.data), setShow(false)) : (setUpdateName('찾는 아디 없습니다.'), setShow(true))
                     
                     // if(res.data===null){
                     //     setResultDiv('찾는아이디없다')
@@ -51,7 +53,7 @@ const UpdateForm = () => {
              .catch(error => console.log(error))
     }
 
-    const updateSubmit = (e) => {
+    const onUpdateSubmit = (e) => {
         e.preventDefault()
 
 
@@ -70,8 +72,8 @@ const UpdateForm = () => {
 
         if (sw === 0) {
             axios
-                .post(
-                    "http://localhost:8080/user/write",
+                .put(
+                    "http://localhost:8080/user/update",
                     "name=" + name + "&id=" + id + "&pwd=" + pwd
                 )
                 .then(() => {
@@ -80,6 +82,12 @@ const UpdateForm = () => {
                 })
                 .catch((error) => console.log(error));
         }
+    }
+
+    const onReset = (e) => {
+        e.preventDefault()
+        onSearch()
+
     }
     
     return (
@@ -106,7 +114,7 @@ const UpdateForm = () => {
             <br></br>
             
             <div id="updateDiv" hidden={show}>
-                <form onSubmit={ updateSubmit } className={styles.updateForm} >
+                <form className={styles.updateForm} >
                 <table border="1">
                     <tbody>
                         <tr>
@@ -131,8 +139,8 @@ const UpdateForm = () => {
                         </tr>
                         <tr>
                             <td colSpan='2' align="center">
-                                <button type='submit'>등록</button>
-                                <button type='reset'>취소</button>
+                                <button onClick={ onUpdateSubmit }>등록</button>
+                                <button onClick = { onReset }>취소</button>
                             </td>
                         </tr>
                     </tbody>

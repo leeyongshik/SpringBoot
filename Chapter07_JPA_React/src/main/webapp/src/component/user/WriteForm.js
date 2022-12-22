@@ -25,7 +25,7 @@ const WriteForm = () => {
             [name] : value
         })
     }
-    const writeSubmit = (e) => {
+    const onWriteSubmit = (e) => {
         e.preventDefault()
 
 
@@ -48,8 +48,9 @@ const WriteForm = () => {
         }
 
         if (sw === 0) {
+            /*
             axios
-                .post(
+                .get(
                     "http://localhost:8080/user/write",
                     "name=" + name + "&id=" + id + "&pwd=" + pwd
                 )
@@ -59,6 +60,18 @@ const WriteForm = () => {
                 })
                 .catch((error) => console.log(error));
             }
+            */
+            axios
+                .get(
+                    "http://localhost:8080/user/write", {params: form}
+                )
+                .then(() => {
+                    alert("회원가입 완료");
+                    navigate("/user/list");
+                })
+                .catch((error) => console.log(error));
+            }
+            
     }
     const checkId = () => {
         axios.get(`http://localhost:8080/user/checkId?id=${id}`)
@@ -66,6 +79,16 @@ const WriteForm = () => {
                 setIdDiv(res.data === false ? '사용 가능' : '사용 불가능')
              })
              .catch()
+    }
+
+    const onReset = (e) => {
+        e.preventDefault()
+
+        setForm({
+            name : '',
+            id: '',
+            pwd : ''
+        })
     }
 
 
@@ -78,7 +101,7 @@ const WriteForm = () => {
                 회원가입
             </h1>
             <hr/>
-            <form onSubmit={ writeSubmit } className={styles.writeForm}>
+            <form className={styles.writeForm}>
                 <table border="1">
                     <tbody>
                         <tr>
@@ -104,8 +127,8 @@ const WriteForm = () => {
                         </tr>
                         <tr>
                             <td colSpan='2' align="center">
-                                <button type='submit'>등록</button>
-                                <button type='reset'>취소</button>
+                                <button onClick={ onWriteSubmit }>등록</button>
+                                <button onClick={ onReset }>취소</button>
                             </td>
                         </tr>
                     </tbody>

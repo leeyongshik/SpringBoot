@@ -5,6 +5,8 @@ import styles from '../../css/DeleteForm.module.css';
 
 const DeleteForm = () => {
 
+    
+
     const [deleteId, setDeleteId] = useState('')
     const [deleteIdDiv, setDeleteIdDiv] = useState('')
 
@@ -14,14 +16,14 @@ const DeleteForm = () => {
     const onSearch = () => {
         setDeleteIdDiv('')
 
-        axios.post(`http://localhost:8080/user/getUser?id=${deleteId}`)
+        axios.get(`http://localhost:8080/user/getUser?id=${deleteId}`)
              .then(res => {
                     setDeleteIdDiv(res.data ? 
-                        axios.get(`http://localhost:8080/user/delete?id=${deleteId}`)
+                        axios.delete(`http://localhost:8080/user/delete?id=${deleteId}`)
                              .then(() => {
-                                alert('삭제하였습니다')
-                                navigate('/user/list')
-                             })
+                                alert("회원삭제 완료");
+                                navigate("/user/list");
+                            })
                              .catch(error => console.log(error))
                         : '찾는 아이디가 없습니다.')
              })
@@ -50,6 +52,9 @@ const DeleteForm = () => {
                 </tbody>
             </table>
             <br></br>
+
+
+            
         </div>
     );
 };
