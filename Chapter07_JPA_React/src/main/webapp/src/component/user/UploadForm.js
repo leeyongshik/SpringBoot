@@ -28,6 +28,7 @@ const UploadForm = () => {
     
     var formData = new FormData()
     formData.append('img', file)
+    console.log(formData)
 
     axios.post('http://localhost:8080/user/upload2', formData, {
       headers : {
